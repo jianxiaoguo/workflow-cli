@@ -30,7 +30,11 @@ func NewDryccCommand() *cobra.Command {
 		},
 	}
 
-	rootCmd.PersistentFlags().StringVarP(&flags.config, "config", "c", "~/.drycc/client.json", i18n.T("Path to configuration file"))
+	config := "~/.drycc/client.json"
+	if v, ok := os.LookupEnv("DRYCC_PROFILE"); ok {
+		config = v
+	}
+	rootCmd.PersistentFlags().StringVarP(&flags.config, "config", "c", config, i18n.T("Path to configuration file"))
 	rootCmd.PersistentFlags().BoolVarP(&flags.help, "help", "h", false, i18n.T("Display help information"))
 
 	rootCmd.AddCommand(parser.NewAppsCommand(&cmdr))

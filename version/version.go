@@ -2,4 +2,4 @@ package version
 
 // Version identifies the Drycc product revision.
 // Note: This value is overwritten by the linker during build
-var Version = "canary"
+var Version = "v1.10.2-patch"
